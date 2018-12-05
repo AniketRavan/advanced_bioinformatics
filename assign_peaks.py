@@ -65,7 +65,7 @@ for i in range(0, len(peak_range)):
 ##############################
 
 for i in event_window_index:
-	windows = sequence[400 + 200*int(i):600 + 200*i] #i is a float
+	windows = sequence[400 + 200*int(i):600 + 200*int(i)] #i is a float
 	if (windows.find('N') == -1):
 		for j in range(0,len(windows)):		
 			kmer_array[kmer2index(windows[j: j+k])] += 1
