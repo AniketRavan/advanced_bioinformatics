@@ -1,7 +1,7 @@
 import numpy as np
 import math
 import matplotlib.pyplot as plt
-file_object = open("wgEncodeAwgDnaseDukeAosmcUniPk.narrowPeak","r")
+file_object = open("../project_data/wgEncodeAwgDnaseDukeAosmcUniPk.narrowPeak","r")
 
 def nucleotide2num(char):
     switcher = {
@@ -30,8 +30,8 @@ for line in file_object:
 	words = line.split()
 	peak_range_el = np.array(words[1:3])
 	peak_range_el = peak_range_el.astype(int)
-	if (peak_range_el[1] - peak_range_el[0] > 200):
-		peak_range_el = peak_range_el.astype(int)
+#	if (peak_range_el[1] - peak_range_el[0] > 200):
+#		peak_range_el = peak_range_el.astype(int)
 	peak_range = np.append(peak_range, [peak_range_el], axis=0)
 	
 
@@ -40,33 +40,31 @@ print peak_range[3,:]
 file_object.close()
 
 # Read sequence
-file_object = open("Homo_sapiens.GRCh37.74.dna.chromosome.1.fa","r")
+file_object = open("../project_data/Homo_sapiens.GRCh37.74.dna.chromosome.1.fa","r")
 #	sequence = np.array(file_object.read())
 line = file_object.readline()
 sequence = ''
 for line in file_object:
 	sequence = sequence + line.replace('\n','')
 print len(sequence)
-
-windows = np.array([])
-for i in range(0, len(peak_range)):
-	lower_bound = int(math.ceil((peak_range[i,0] - 500)/200))
-	upper_bound = int(math.floor((peak_range[i,1] - 500)/200) + 1)
-
-	indices = range(lower_bound, upper_bound)
-	for x in range(lower_bound, upper_bound):
-		windows = np.append(windows, sequence[x:x+200])	
-print len(windows)
+print len(peak_range)
 
 # Counting k-mers
 k = 5
-kmer_array = np.array([]*(4**k))
-for i in range(0,len(windows)):
-	for j in range(0,len(windows)):
-		j
-		kmer_array[kmer2index(windows[j: j+k])] += 1
-	
+kmer_array = np.array([0]*(4**k))
 
+for i in range(0, len(peak_range)):
+	lower_bound = int(math.ceil((peak_range[i,0] - 500)/200))
+	upper_bound = int(math.floor((peak_range[i,1] - 500)/200) + 1)
+	#indices = range(lower_bound, upper_bound)
+	for x in range(lower_bound, upper_bound):
+		windows = sequence[400 + 200*x:600 + 200*x]
+		if (windows.find('N') == -1):
+			for j in range(0,len(windows)):		
+				kmer_array[kmer2index(windows[j: j+k])] += 1
+				# windows = np.append(windows, sequence[x:x+200])	
+
+len(kmer_array)
 plt.plot(range(0, len(kmer_array)), kmer_array)
 
 
