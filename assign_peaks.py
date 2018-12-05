@@ -53,6 +53,11 @@ print len(peak_range)
 k = 5
 kmer_array = np.array([0]*(4**k))
 
+##############################
+# Generate vector of window-indices having binding events
+# Save the matrix to a text file 
+##############################
+
 for i in range(0, len(peak_range)):
 	lower_bound = int(math.ceil((peak_range[i,0] - 500)/200))
 	upper_bound = int(math.floor((peak_range[i,1] - 500)/200) + 1)
@@ -66,5 +71,5 @@ for i in range(0, len(peak_range)):
 
 len(kmer_array)
 plt.plot(range(0, len(kmer_array)), kmer_array)
-
+plt.show()
 
