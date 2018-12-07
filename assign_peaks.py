@@ -49,9 +49,6 @@ for line in file_object:
 #print len(sequence)
 #print len(peak_range)
 
-# Counting k-mers
-k = 5
-kmer_array = np.array([0]*(4**k))
 
 ##############################
 # Generate vector of window-indices having binding events
@@ -64,14 +61,23 @@ for i in range(0, len(peak_range)):
 # Save the matrix to a text file 
 ##############################
 
+# Counting k-mers
+k = 5
+kmer_matrix = np.array([[0]*(4**k)]*len(event_window_index))
+
+idx = 0 # index of element in event_window_index
 for i in event_window_index:
 	windows = sequence[400 + 200*int(i):600 + 200*int(i)] #i is a float
 	if (windows.find('N') == -1):
 		for j in range(0,len(windows)):		
-			kmer_array[kmer2index(windows[j: j+k])] += 1
+			kmer_matrix[idx][kmer2index(windows[j: j+k])] += 1
+	idx += 1
 			# windows = np.append(windows, sequence[x:x+200])	
+mat_file = np.matrix(kmer_matrix)
+with open('positive_set.txt','wb') as f:
+    for line in mat_file:
+        np.savetxt(f, line, fmt='%.2f')
 
-len(kmer_array)
-plt.plot(range(0, len(kmer_array)), kmer_array)
+plt.plot(range(0, 4**k), kmer_matrix[20][:])
 plt.show()
 
