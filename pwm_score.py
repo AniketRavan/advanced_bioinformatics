@@ -1,6 +1,12 @@
 # k for calculating deltaSVM is 10 
 # flanking region for PWM score is 1 kb long (500 bp on both sides): line[1] - 9 - 500, line[1] + 10 + 500
 # PFMs obtained from JASPAR
+variant_positions = []
+with open("../project_data/ASB.auto.v2.1.aug16.txt") as f:
+    next(f)
+    for line in f:
+        line = line.split()
+        variant_positions.append(int(line[1]))
 import numpy as np
 pfm = np.empty(shape=(0,14), dtype=float)
 with open("../project_data/MA1102.1.pfm") as f:
@@ -18,6 +24,7 @@ with open("../project_data/chr22.fa") as f:
     next(f)
     for line in f:
         genome = genome + line.replace('\n','')
+        
         
 seq_mat = np.zeros((4, len(genome)))
 # indices are defined in the order A, C, G, T

@@ -50,7 +50,6 @@ for line in file_object:
 #print len(peak_range)
 
 
-##############################
 # Generate vector of window-indices having binding events
 event_window_index = []
 for i in range(0, len(peak_range)):
@@ -58,8 +57,6 @@ for i in range(0, len(peak_range)):
 	upper_bound = int(math.floor((peak_range[i,1] - 500)/200) + 1)
 	event_window_index = np.append(event_window_index, range(lower_bound, upper_bound))
 
-# Save the matrix to a text file 
-##############################
 
 # Counting k-mers
 k = 5
@@ -80,4 +77,3 @@ with open('positive_set.txt','wb') as f:
 
 plt.plot(range(0, 4**k), kmer_matrix[20][:])
 plt.show()
-
