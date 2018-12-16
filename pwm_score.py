@@ -17,6 +17,9 @@ with open("../project_data/MA1102.1.pfm") as f:
             line[i] = float(line[i])
         pfm = np.append(pfm, [line], axis=0)
 
+for i in range(0, 14):
+    pwm[:,i] = np.log(pfm[:,i]/(sum(pfm[:,i])*0.25))
+
 f.close()
 # Reading hg19 sequence file
 genome = ''
