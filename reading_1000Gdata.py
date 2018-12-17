@@ -1,7 +1,8 @@
+#### This program reads ASB data from a file (hardcoded in the script) and generates 1 file per TF  with ASB data ####
 counts = {}
 ref_allele = {}
 alt_allele = {}
-with open("../project_data/ASB.auto.v2.1.aug16.txt") as f:
+with open("project_data/ASB.auto.v2.1.aug16.txt") as f:
     next(f)
     for line in f:
         line = line.split()
