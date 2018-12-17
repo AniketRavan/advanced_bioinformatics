@@ -2,13 +2,13 @@
 # Positions should be imported from ABS data for every TF independently
 #############################################################################################
 window_size = 5000
-positions = [43023]
+folder_path = '../project_data/'
+positions = [43023]  # Obtained from ASB data
 genome_file = 'chr22'
 TF = 'TF'
-
 #############################################################################################
-fW = open('../project_data/' + genome_file + TF + '_filt.fa','w')
-fR = open('../project_data/' + genome_file + '.fa')
+fW = open(folder_path + genome_file + TF + '_filt.fa','w')
+fR = open(folder_path + genome_file + '.fa')
 fR.readline() # skip the first line
 genome = fR.readlines()
 fR.close()
