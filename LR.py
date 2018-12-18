@@ -10,10 +10,9 @@ from sklearn import metrics
 sns.set(style="white")
 sns.set(style="whitegrid", color_codes=True)
 
-data = pd.read_csv('LR_input_trimmed2_CTCF.txt', header=0)
+data = pd.read_csv('project_data/500bp/LR_input_all_CTCF_500.txt', header=0)
 print(data)
 print(type(data))
-print(data.shape)
 print(list(data.columns))
 X = data.loc[:, data.columns != 'Label']
 y = data.loc[:, data.columns == 'Label']
@@ -23,14 +22,11 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3)
 print(X_test)
 print(y_test)
 
+
 LR = LogisticRegression()
 LR.fit(X_train, y_train)
 predict = LR.predict(X_test)
-score = LR.score(X_test, y_test)
-print(score)
-cm = metrics.confusion_matrix(y_test, predict)
-print(cm)
-
+print(predict)
 
 from sklearn.metrics import roc_auc_score
 from sklearn.metrics import roc_curve
