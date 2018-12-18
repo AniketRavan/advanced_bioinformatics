@@ -10,7 +10,7 @@ from sklearn import metrics
 sns.set(style="white")
 sns.set(style="whitegrid", color_codes=True)
 
-data = pd.read_csv('project_data/SimulatedLRData.txt', header=0)
+data = pd.read_csv('LR_input_trimmed2_CTCF.txt', header=0)
 print(data)
 print(type(data))
 print(data.shape)
