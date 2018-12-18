@@ -7,14 +7,14 @@ TF = 'TF'
 filename = '../project_data/trial.txt'
 fR = open(filename)
 positions_list = [[] for i in range(0,22)]
-ref_nucleotide = [[] for i in range(0,22)]
+# ref_nucleotide = [[] for i in range(0,22)]
 for line in fR:
     line = line.replace('\n', '')
     line = line.split('\t')
     chromosome = line[0]
     chromosome_num = int(chromosome.replace('chr',''))
     positions_list[chromosome_num - 1].extend([int(line[1])])
-    ref_nucleotide[chromosome_num - 1].extend([line[2]])
+#    ref_nucleotide[chromosome_num - 1].extend([line[2]])
 fR.close()
 window_size = 5000
 folder_path = '/home/aniket/Desktop/bioinfo/CS598SS/project_data/genome/'
@@ -31,7 +31,7 @@ for i in range(0,22):
     genome = ''.join(genome)
     genome = genome.replace('\n','')
     positions = positions_list[i]
-    ref_nucleotides = ref_nucleotide[i]
+#    ref_nucleotides = ref_nucleotide[i]
     for i in positions:
         fW.write(genome[i - 2500 : i + 2499])
         fW.write('\n')
