@@ -8,7 +8,6 @@ shown to be heterogeneous across different cell lines. For instance, Arvey et al
 ChIP-seq data for 67 TFs across multiple different and found that many cell-type-specific sequence models
 were able to capture binding variability, which was primarily due to differences in heteromeric complex
 formations
-
 import matplotlib.pyplot as plt
 import numpy as np
 f = open('../codes/project_data/500bp/LR_input_all_CTCF_500.txt')
@@ -20,5 +19,7 @@ for line in lines:
 	line = line.split(',')
 	deltaSVM.append(line[0])
 	PWM.append(line[1])
-plt.plot(PWM, deltaSVM)
+PWM = np.array(PWM)
+deltaSVM = np.array(deltaSVM)
+plt.plot((PWM - min(PWM))(max(PWM) - min(PWM)), (deltaSVM - min(deltaSVM))/(max(deltaSVM) - min(detlaSVM))
 plt.show()
